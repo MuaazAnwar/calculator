@@ -5,6 +5,9 @@
  */
 package calculator;
 
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
 /**
  *
  * @author Nabeel
@@ -16,6 +19,17 @@ public class NewJFrame extends javax.swing.JFrame {
      */
     public NewJFrame() {
         initComponents();
+        
+        textField.setText("welcome to calculator");
+        textField.addMouseListener(new MouseAdapter(){
+            @Override
+            public void mouseClicked(MouseEvent e){
+                textField.setText("");
+            }
+        });
+
+        
+        
     }
 
     /**
@@ -42,6 +56,7 @@ public class NewJFrame extends javax.swing.JFrame {
         val2button = new java.awt.Button();
         result = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
+        button1 = new java.awt.Button();
         jMenuBar2 = new javax.swing.JMenuBar();
         jMenu3 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -89,6 +104,11 @@ public class NewJFrame extends javax.swing.JFrame {
         jLabel2.setText("Value 2:");
 
         val2.setText("0");
+        val2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                val2ActionPerformed(evt);
+            }
+        });
 
         val1button.setLabel("Set value 1");
         val1button.addActionListener(new java.awt.event.ActionListener() {
@@ -108,6 +128,14 @@ public class NewJFrame extends javax.swing.JFrame {
         result.setText("0");
 
         jLabel3.setText("Result:");
+
+        button1.setActionCommand("Sub (-)");
+        button1.setLabel("Sub (-)");
+        button1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button1ActionPerformed(evt);
+            }
+        });
 
         jMenu3.setText("File");
 
@@ -146,16 +174,21 @@ public class NewJFrame extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(textField)
-                    .addComponent(jButton1)
-                    .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(10, 10, 10)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(val2button, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(val1button, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 146, Short.MAX_VALUE)
-                                .addComponent(add, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(button1, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(add, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButton1)
+                            .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 80, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -166,7 +199,8 @@ public class NewJFrame extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(val1button, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(add, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(add, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(button1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(val2button, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(24, 24, 24)
@@ -202,10 +236,16 @@ public class NewJFrame extends javax.swing.JFrame {
         int y = Integer.parseInt(val2.getText());
 
         result.setText(String.valueOf(x+y));
+        jProgressBar1.setValue(jProgressBar1.getValue()+5);
+        if(jProgressBar1.getValue()==100){
+            textField.setText("Bas kr jaa!");
+        }else{
+              textField.setText("");
+          }
     }//GEN-LAST:event_addActionPerformed
 
     private void textFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textFieldActionPerformed
-        // TODO add your handling code here:
+       
     }//GEN-LAST:event_textFieldActionPerformed
 
     private void val1buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_val1buttonActionPerformed
@@ -224,8 +264,25 @@ public class NewJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_val2buttonActionPerformed
 
     private void val1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_val1ActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_val1ActionPerformed
+
+    private void button1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button1ActionPerformed
+         int x = Integer.parseInt(val1.getText());
+        int y = Integer.parseInt(val2.getText());
+
+        result.setText(String.valueOf(x-y));
+        jProgressBar1.setValue(jProgressBar1.getValue()+5);
+          if(jProgressBar1.getValue()==100){
+            textField.setText("Bas kr jaa!");
+        }
+          else{
+              textField.setText("");
+          }
+    }//GEN-LAST:event_button1ActionPerformed
+
+    private void val2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_val2ActionPerformed
+    }//GEN-LAST:event_val2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -258,12 +315,14 @@ public class NewJFrame extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new NewJFrame().setVisible(true);
+                
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private java.awt.Button add;
+    private java.awt.Button button1;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
