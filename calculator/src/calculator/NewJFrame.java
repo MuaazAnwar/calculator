@@ -21,10 +21,12 @@ public class NewJFrame extends javax.swing.JFrame {
         initComponents();
         
         textField.setText("welcome to calculator");
+        textField.setEditable(false);
         textField.addMouseListener(new MouseAdapter(){
             @Override
             public void mouseClicked(MouseEvent e){
                 textField.setText("");
+                textField.setEditable(true);
             }
         });
 
